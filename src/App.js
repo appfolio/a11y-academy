@@ -20,12 +20,24 @@ function SkipNavLink({ skipId }) {
 }
 
 function Index() {
+  React.useEffect(() => {
+    document.title = 'Today We Learned';
+  }, []);
+
   return (
     <>
       <Header />
       <TILCard />
     </>
   );
+}
+
+function NewEntryPage() {
+  React.useEffect(() => {
+    document.title = 'New TWL Entry';
+  }, []);
+
+  return <NewEntryForm />;
 }
 
 function App() {
@@ -37,7 +49,7 @@ function App() {
         <main id="main-content">
           <Router>
             <Index path="/" />
-            <NewEntryForm path="/entries/new" />
+            <NewEntryPage path="/entries/new" />
           </Router>
         </main>
       </Container>
