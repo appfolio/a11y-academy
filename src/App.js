@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Router } from '@reach/router'
 import { Container } from 'reactstrap';
 import MyNav from './MyNav';
 import NewEntryForm from './NewEntryForm';
@@ -32,15 +32,15 @@ function App() {
   return (
     <>
       <SkipNavLink skipId="main-content" />
-      <Router>
-        <MyNav />
-        <Container>
-          <main id="main-content">
-            <Route exact path="/" component={Index} />
-            <Route path="/entries/new" component={NewEntryForm} />
-          </main>
-        </Container>
-      </Router>
+      <MyNav />
+      <Container>
+        <main id="main-content">
+          <Router>
+            <Index path="/" />
+            <NewEntryForm path="/entries/new" />
+          </Router>
+        </main>
+      </Container>
     </>
   );
 }
