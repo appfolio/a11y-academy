@@ -1,20 +1,13 @@
 import { Router } from '@reach/router';
 import React from 'react';
 import { Container } from 'reactstrap';
+import FaqPage from './FaqPage';
 import IndexPage from './IndexPage';
 import MyNav from './MyNav';
 import NewEntryForm from './NewEntryForm';
 
 function SkipNavLink({ skipId }) {
   return <a className="sr-only sr-only-focusable" href={`#${skipId}`}>Skip to content</a>;
-}
-
-function NewEntryPage() {
-  React.useEffect(() => {
-    document.title = 'New TWL Entry';
-  }, []);
-
-  return <NewEntryForm />;
 }
 
 function App() {
@@ -26,7 +19,7 @@ function App() {
         <main id="main-content">
           <Router>
             <IndexPage path="/" />
-            <NewEntryPage path="/entries/new" />
+            <NewEntryForm path="/entries/new" />
           </Router>
         </main>
       </Container>

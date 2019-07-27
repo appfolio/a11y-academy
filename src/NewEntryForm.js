@@ -31,6 +31,10 @@ function GroupedSelectInput({ id, label, groupedOptions }) {
 }
 
 export default function NewEntryForm() {
+  React.useEffect(() => {
+    document.title = 'New TWL Entry';
+  }, []);
+
   return (
     <Form>
       <h1>New <abbr title="Today We Learned">TWL</abbr> Entry</h1>
