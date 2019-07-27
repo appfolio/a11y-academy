@@ -19,6 +19,7 @@ function App() {
         <main id="main-content">
           <Router>
             <IndexPage path="/" />
+            <FaqPage path="/faqs" />
             <NewEntryForm path="/entries/new" />
           </Router>
         </main>
