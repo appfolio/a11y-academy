@@ -1,35 +1,12 @@
+import { Router } from '@reach/router';
 import React from 'react';
-import { Router } from '@reach/router'
 import { Container } from 'reactstrap';
+import IndexPage from './IndexPage';
 import MyNav from './MyNav';
 import NewEntryForm from './NewEntryForm';
-import TILCard from './TILCard';
-
-function Header() {
-  return (
-    <header className="App-header">
-      <p>
-        A bunch of write ups about something a team learned. Failure is ok as long as we learn from it!
-      </p>
-    </header>
-  );
-}
 
 function SkipNavLink({ skipId }) {
   return <a className="sr-only sr-only-focusable" href={`#${skipId}`}>Skip to content</a>;
-}
-
-function Index() {
-  React.useEffect(() => {
-    document.title = 'Today We Learned';
-  }, []);
-
-  return (
-    <>
-      <Header />
-      <TILCard />
-    </>
-  );
 }
 
 function NewEntryPage() {
@@ -48,7 +25,7 @@ function App() {
       <Container>
         <main id="main-content">
           <Router>
-            <Index path="/" />
+            <IndexPage path="/" />
             <NewEntryPage path="/entries/new" />
           </Router>
         </main>

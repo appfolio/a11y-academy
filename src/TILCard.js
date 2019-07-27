@@ -3,12 +3,12 @@ import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap';
 
 
 // maybe make this an article? section?
-export default function TILCard({ title, body }) {
+export default function TILCard({ title, children, className }) {
   return (
-    <Card body>
+    <Card className={className}>
       <CardBody>
         <CardTitle tag="h2">{title}</CardTitle>
-        <CardText>{body}</CardText>
+        <CardText>{children}</CardText>
         <Button>View More</Button>
       </CardBody>
     </Card>
