@@ -11,6 +11,14 @@ import {
   ModalFooter
 } from "reactstrap";
 
+function NewLinesToParagraphs({ children }) {
+  // These shouldn't be reordered so the index should be a safe key.
+  return children
+    .trim()
+    .split("\n")
+    .map((str, idx) => <p key={idx}>{str}</p>);
+}
+
 const ShareModalHeader = ({ children, className, ...props }) => (
   <h3 className={`h5 ${className}`} {...props}>
     {children}
@@ -47,8 +55,10 @@ export default function TILCard({ title, children, className }) {
       <Card className={className}>
         <CardHeader tag="h2">{title}</CardHeader>
         <CardBody>
-          <CardText tag="div">{children}</CardText>
-          <Button color="link" onClick={toggleIsShareModalOpen}>
+          <CardText tag="div">
+            <NewLinesToParagraphs>{children}</NewLinesToParagraphs>
+          </CardText>
+          <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
             <i className="fa fa-share-alt mr-1" aria-hidden="true" />
             Share
           </Button>

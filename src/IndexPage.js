@@ -4,14 +4,6 @@ import { Button } from "reactstrap";
 import data from "./seeddata.json";
 import TILCard from "./TILCard";
 
-function NewLinesToParagraphs({ children }) {
-  // These shouldn't be reordered so the index should be a safe key.
-  return children
-    .trim()
-    .split("\n")
-    .map((str, idx) => <p key={idx}>{str}</p>);
-}
-
 export default function IndexPage() {
   React.useEffect(() => {
     document.title = "Today We Learned";
@@ -39,7 +31,7 @@ export default function IndexPage() {
         {data.map(entry => (
           <li key={entry.title}>
             <TILCard className="mb-3" title={entry.title} author={entry.author}>
-              <NewLinesToParagraphs>{entry.body}</NewLinesToParagraphs>
+              {entry.body}
             </TILCard>
           </li>
         ))}
