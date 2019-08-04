@@ -1,10 +1,9 @@
 import { Link } from "@reach/router";
 import React from "react";
 import { Button } from "reactstrap";
-import data from "./seeddata.json";
 import TILCard from "./TILCard";
 
-export default function IndexPage() {
+export default function IndexPage({ entries }) {
   React.useEffect(() => {
     document.title = "Today We Learned";
   }, []);
@@ -28,7 +27,7 @@ export default function IndexPage() {
         Add New Entry
       </Button>
       <ul className="list-unstyled">
-        {data.map(entry => (
+        {entries.map(entry => (
           <li key={entry.title}>
             <TILCard className="mb-3" title={entry.title} author={entry.author}>
               {entry.body}

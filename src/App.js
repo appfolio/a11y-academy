@@ -5,6 +5,7 @@ import FaqPage from "./FaqPage";
 import IndexPage from "./IndexPage";
 import MyNav from "./MyNav";
 import NewEntryForm from "./NewEntryForm";
+import data from "./seeddata";
 
 function SkipNavLink({ skipId }) {
   return (
@@ -15,6 +16,8 @@ function SkipNavLink({ skipId }) {
 }
 
 function App() {
+  const [entries] = React.useState(data);
+
   return (
     <>
       <SkipNavLink skipId="main-content" />
@@ -22,7 +25,7 @@ function App() {
       <Container>
         <main id="main-content">
           <Router>
-            <IndexPage path="/" />
+            <IndexPage path="/" entries={entries} />
             <FaqPage path="/faqs" />
             <NewEntryForm path="/entries/new" />
           </Router>
