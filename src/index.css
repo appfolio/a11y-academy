@@ -1,3 +1,7 @@
 a {
   text-decoration: underline;
 }
+
+textarea:required {
+  box-shadow: none;
+}
