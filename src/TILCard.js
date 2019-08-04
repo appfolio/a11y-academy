@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  CardText,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, CardText } from "reactstrap";
+import ShareModal from "./ShareModal";
 
 function NewLinesToParagraphs({ children }) {
   // These shouldn't be reordered so the index should be a safe key.
@@ -17,30 +8,6 @@ function NewLinesToParagraphs({ children }) {
     .trim()
     .split("\n")
     .map((str, idx) => <p key={idx}>{str}</p>);
-}
-
-const ShareModalHeader = ({ children, className, ...props }) => (
-  <h3 className={`h5 ${className}`} {...props}>
-    {children}
-  </h3>
-);
-
-function ShareModal({ ...props }) {
-  return (
-    <Modal {...props}>
-      <ModalHeader tag={ShareModalHeader} toggle={props.toggle}>
-        Share TIL
-      </ModalHeader>
-      <ModalBody>
-        This Modal doesn't actually share anything lol. Note that focus is
-        trapped inside of the modal - we can't tab outside of it. Also note the
-        focus switch back to the original share button when the modal closes.
-      </ModalBody>
-      <ModalFooter>
-        <Button color="primary">Share</Button>
-      </ModalFooter>
-    </Modal>
-  );
 }
 
 // maybe make this an article? section?
