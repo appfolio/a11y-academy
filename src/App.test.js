@@ -1,10 +1,10 @@
-import { cleanup, render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import {
   createHistory,
   createMemorySource,
   LocationProvider
 } from "@reach/router";
+import "@testing-library/jest-dom/extend-expect";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import axe from "axe-core";
 import React from "react";
 import App from "./App";
@@ -35,7 +35,6 @@ describe("App", () => {
       history: { navigate }
     } = renderWithRouter(<App />);
 
-    await navigate("/");
     expect(container.innerHTML).toMatch("Today We Learned");
 
     await navigate("/faqs");
@@ -43,5 +42,48 @@ describe("App", () => {
 
     await navigate("/entries/new");
     expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
+  });
+
+  it("shows error messages on the form", async () => {
+    const { getByRole, getAllByText, getByText, findByText } = renderWithRouter(
+      <App />,
+      {
+        route: "/entries/new"
+      }
+    );
+
+    fireEvent.click(getByText("Add New Entry"));
+
+    // TODO: change this to wait for the flash message instead
+    await findByText("There were 3 problems with your form:");
+
+    expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
+    expect(getAllByText("You must enter a title").length).toEqual(2);
+    expect(getAllByText("You must enter a body").length).toEqual(2);
+    expect(getAllByText("You must enter a color").length).toEqual(2);
+  });
+
+  it("successfully adds a new entry", async () => {
+    const { getByLabelText, getByText } = renderWithRouter(<App />, {
+      route: "/entries/new"
+    });
+
+    const titleInput = getByLabelText("Title");
+    fireEvent.change(titleInput, { target: { value: "Suh dude" } });
+    expect(titleInput.value).toBe("Suh dude");
+
+    const bodyInput = getByLabelText("Body");
+    fireEvent.change(bodyInput, {
+      target: { value: "Kiss me thru the phone" }
+    });
+    expect(bodyInput.value).toBe("Kiss me thru the phone");
+
+    const greenRadio = getByLabelText("Green");
+    fireEvent.click(greenRadio);
+    expect(greenRadio.checked).toBe(true);
+
+    fireEvent.click(getByText("Add New Entry"));
+    // TODO: test the rest of this
+    // https://github.com/reach/router/issues/225
   });
 });
