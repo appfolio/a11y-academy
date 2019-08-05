@@ -77,8 +77,8 @@ export default function NewEntryForm(props) {
   const onSubmit = e => {
     e.preventDefault();
     // set flash message state if false
-    props.onSubmit({ title, body, favoriteColor, team }).then(e => {
-      setErrors(e);
+    props.onSubmit({ title, body, favoriteColor, team }).then(err => {
+      if (Object.values(err).some(v => v)) setErrors(err);
     });
   };
 

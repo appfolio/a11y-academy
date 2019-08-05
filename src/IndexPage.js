@@ -11,7 +11,7 @@ export default function IndexPage({ entries }) {
   return (
     <>
       <header>
-        <h1>Today We Learned</h1>
+        <h1 data-testid="page-heading">Today We Learned</h1>
         <p>
           A bunch of write ups about something a team learned. Failure is ok as
           long as we learn from it!

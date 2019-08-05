@@ -64,9 +64,12 @@ describe("App", () => {
   });
 
   it("successfully adds a new entry", async () => {
-    const { getByLabelText, getByText } = renderWithRouter(<App />, {
-      route: "/entries/new"
-    });
+    const { findByTestId, getByLabelText, getByText } = renderWithRouter(
+      <App />,
+      {
+        route: "/entries/new"
+      }
+    );
 
     const titleInput = getByLabelText("Title");
     fireEvent.change(titleInput, { target: { value: "Suh dude" } });
@@ -83,7 +86,11 @@ describe("App", () => {
     expect(greenRadio.checked).toBe(true);
 
     fireEvent.click(getByText("Add New Entry"));
-    // TODO: test the rest of this
+
+    const heading = await findByTestId("page-heading");
+    expect(heading).toHaveTextContent("Today We Learned");
+
+    // TODO: test flash messages
     // https://github.com/reach/router/issues/225
   });
 });

@@ -1,4 +1,4 @@
-import { navigate, Router } from "@reach/router";
+import { Router, Location } from "@reach/router";
 import React from "react";
 import { Container } from "reactstrap";
 import FaqPage from "./FaqPage";
@@ -8,28 +8,6 @@ import MyNav from "./MyNav";
 import NewEntryForm from "./NewEntryForm";
 import data from "./seeddata";
 
-const onSubmit = async data => {
-  const { title, body, favoriteColor, team } = data;
-
-  const errors = {
-    title: title.length > 0 ? null : "You must enter a title",
-    body: body.length > 0 ? null : "You must enter a body",
-    favoriteColor: favoriteColor ? null : "You must enter a color",
-    team: team ? null : "You must enter a team"
-  };
-
-  if (!(errors.title || errors.body || errors.favoriteColor || errors.team)) {
-    await navigate("/", {
-      state: {
-        flashMessage: {
-          color: "success",
-          message: "Successfully added new entry"
-        }
-      }
-    });
-  }
-  return errors;
-};
 
 function SkipNavLink({ skipId }) {
   return (
@@ -39,7 +17,30 @@ function SkipNavLink({ skipId }) {
   );
 }
 
-function App() {
+function App({ location, navigate }) {
+  const onSubmit = async data => {
+    const { title, body, favoriteColor, team } = data;
+
+    const errors = {
+      title: title.length > 0 ? null : "You must enter a title",
+      body: body.length > 0 ? null : "You must enter a body",
+      favoriteColor: favoriteColor ? null : "You must enter a color",
+      team: team ? null : "You must enter a team"
+    };
+
+    if (!(errors.title || errors.body || errors.favoriteColor || errors.team)) {
+      await navigate("/", {
+        state: {
+          flashMessage: {
+            color: "success",
+            message: "Successfully added new entry"
+          }
+        }
+      });
+    }
+    return errors;
+  };
+
   const [entries] = React.useState(data);
 
   return (
@@ -49,7 +50,7 @@ function App() {
       <Container>
         <main id="main-content">
           <FlashMessage />
-          <Router>
+          <Router location={location}>
             <IndexPage path="/" entries={entries} />
             <FaqPage path="/faqs" />
             <NewEntryForm path="/entries/new" onSubmit={onSubmit} />
@@ -60,4 +61,15 @@ function App() {
   );
 }
 
-export default App;
+// this component exists as a hack due to a bug in testing reach router
+function MyLocationWrapper() {
+  return (
+    <Location>
+      {({ location, navigate }) => (
+        <App location={location} navigate={navigate} />
+      )}
+    </Location>
+  );
+}
+
+export default MyLocationWrapper;
