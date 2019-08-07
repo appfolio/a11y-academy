@@ -16,12 +16,8 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
   const targetId = "button-with-tooltip-target";
 
   return (
-    <span
-      id={targetId}
-      className="d-inline-block"
-      tabIndex={disabled ? 0 : -1}
-      title={disabled ? toolTipText : undefined}
-    >
+    // Note we don't need a title attribute due to visible text
+    <span id={targetId} className="d-inline-block" tabIndex={disabled ? 0 : -1}>
       <Button
         style={{ pointerEvents: disabled ? "none" : "inherit" }}
         disabled={disabled}
@@ -30,7 +26,9 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
         {children}
       </Button>
       {disabled && (
-        <UncontrolledTooltip target={targetId}>{toolTipText}</UncontrolledTooltip>
+        <UncontrolledTooltip target={targetId}>
+          {toolTipText}
+        </UncontrolledTooltip>
       )}
     </span>
   );
@@ -42,15 +40,20 @@ const ShareModalHeader = ({ children, className, ...props }) => (
   </h3>
 );
 
-export default function ShareModal({ ...props }) {
+export default function ShareModal({ onSubmit, ...props }) {
   const [email, setEmail] = React.useState("");
   const isEmailValid = /\S+@\S+\.\S+/.test(email);
 
   return (
     <Modal {...props}>
-      <Form>
+      <Form
+        onSubmit={e => {
+          e.preventDefault();
+          onSubmit(email);
+        }}
+      >
         <ModalHeader tag={ShareModalHeader} toggle={props.toggle}>
-          Share TIL
+          Share Today We Learned
         </ModalHeader>
         <ModalBody>
           <p>
@@ -77,7 +80,7 @@ export default function ShareModal({ ...props }) {
             disabled={!isEmailValid}
             toolTipText="You must enter a valid email address"
           >
-            Share TIL Entry
+            Share TWL Entry
           </ButtonWithTooltip>
         </ModalFooter>
       </Form>

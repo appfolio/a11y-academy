@@ -17,6 +17,11 @@ export default function TILCard({ title, children, className }) {
     () => setIsShareModalOpen(prevState => !prevState),
     [setIsShareModalOpen]
   );
+
+  const onSubmit = () => {
+    // TODO: wait, flash message
+    toggleIsShareModalOpen();
+  }
   return (
     <>
       <Card className={className}>
@@ -31,7 +36,11 @@ export default function TILCard({ title, children, className }) {
           </Button>
         </CardBody>
       </Card>
-      <ShareModal isOpen={isShareModalOpen} toggle={toggleIsShareModalOpen} />
+      <ShareModal
+        onSubmit={onSubmit}
+        isOpen={isShareModalOpen}
+        toggle={toggleIsShareModalOpen}
+      />
     </>
   );
 }

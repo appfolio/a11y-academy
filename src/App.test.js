@@ -93,4 +93,28 @@ describe("App", () => {
     // TODO: test flash messages
     // https://github.com/reach/router/issues/225
   });
+
+  it("has a share modal that works", async () => {
+    const { getAllByText, getByLabelText, getByText } = renderWithRouter(
+      <App />,
+      {
+        route: "/"
+      }
+    );
+
+    const [shareButton] = getAllByText("Share");
+    fireEvent.click(shareButton);
+
+    expect(getByText("Share Today We Learned")).toBeVisible();
+
+    // TODO: test tooltip
+    expect(getByText("Share TWL Entry")).toBeDisabled();
+
+    fireEvent.change(getByLabelText("Email"), {
+      target: { value: "hello@example.com" }
+    });
+    expect(getByText("Share TWL Entry")).not.toBeDisabled();
+
+    // TODO: test opening/closing modal
+  });
 });
