@@ -6,6 +6,7 @@ import FlashMessage from "./FlashMessage";
 import IndexPage from "./IndexPage";
 import MyNav from "./MyNav";
 import NewEntryForm from "./NewEntryForm";
+import ShowPage from "./ShowPage";
 import data from "./seeddata";
 
 
@@ -54,6 +55,7 @@ function App({ location, navigate }) {
             <IndexPage path="/" entries={entries} />
             <FaqPage path="/faqs" />
             <NewEntryForm path="/entries/new" onSubmit={onSubmit} />
+            <ShowPage entries={entries} path="/entries/:title" />
           </Router>
         </main>
       </Container>

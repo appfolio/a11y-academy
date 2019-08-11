@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 import { Button, Card, CardBody, CardHeader, CardText } from "reactstrap";
 import ShareModal from "./ShareModal";
 
@@ -21,11 +22,15 @@ export default function TILCard({ title, children, className }) {
   const onSubmit = () => {
     // TODO: wait, flash message
     toggleIsShareModalOpen();
-  }
+  };
+  const encodedTitle = encodeURIComponent(title);
+
   return (
     <>
       <Card className={className}>
-        <CardHeader tag="h2">{title}</CardHeader>
+        <CardHeader tag="h2">
+          <Link to={`/entries/${encodedTitle}`}>{title}</Link>
+        </CardHeader>
         <CardBody>
           <CardText tag="div">
             <NewLinesToParagraphs>{children}</NewLinesToParagraphs>
