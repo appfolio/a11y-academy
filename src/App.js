@@ -18,6 +18,24 @@ function SkipNavLink({ skipId }) {
   );
 }
 
+function MainLayout({ children }) {
+  return (
+    <>
+      <SkipNavLink skipId="main-content" />
+      <MyNav />
+      <Container>
+        <main id="main-content">
+          <FlashMessage />
+          {children}
+        </main>
+        <footer className="py-3 mt-auto">
+          <span className="text-muted">Copyright AppFolio Inc.</span>
+        </footer>
+      </Container>
+    </>
+  );
+}
+
 function App({ location, navigate }) {
   const onSubmit = async data => {
     const { title, body, favoriteColor, team } = data;
@@ -45,21 +63,14 @@ function App({ location, navigate }) {
   const [entries] = React.useState(data);
 
   return (
-    <>
-      <SkipNavLink skipId="main-content" />
-      <MyNav />
-      <Container>
-        <main id="main-content">
-          <FlashMessage />
-          <Router location={location}>
-            <IndexPage path="/" entries={entries} />
-            <FaqPage path="/faqs" />
-            <NewEntryForm path="/entries/new" onSubmit={onSubmit} />
-            <ShowPage entries={entries} path="/entries/:title" />
-          </Router>
-        </main>
-      </Container>
-    </>
+    <MainLayout>
+      <Router location={location}>
+        <IndexPage path="/" entries={entries} />
+        <FaqPage path="/faqs" />
+        <NewEntryForm path="/entries/new" onSubmit={onSubmit} />
+        <ShowPage entries={entries} path="/entries/:title" />
+      </Router>
+    </MainLayout>
   );
 }
 
