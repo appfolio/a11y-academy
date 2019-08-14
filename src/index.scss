@@ -1,0 +1,14 @@
+$primary: #286f8a; // from tportal but a bit darker
+$secondary: #e2e2e2;
+$body-bg: #f2f7fa;
+$dark: #444950;
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+a {
+  text-decoration: underline;
+}
+
+textarea:required {
+  box-shadow: none;
+}
