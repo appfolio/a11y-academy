@@ -40,7 +40,7 @@ const ShareModalHeader = ({ children, className, ...props }) => (
   </h3>
 );
 
-export default function ShareModal({ onSubmit, ...props }) {
+function ShareModal({ onSubmit, ...props }) {
   const [email, setEmail] = React.useState("");
   const isEmailValid = /\S+@\S+\.\S+/.test(email);
 
@@ -85,5 +85,31 @@ export default function ShareModal({ onSubmit, ...props }) {
         </ModalFooter>
       </Form>
     </Modal>
+  );
+}
+
+export default function ShareButton(props) {
+  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
+  const toggleIsShareModalOpen = React.useCallback(
+    () => setIsShareModalOpen(prevState => !prevState),
+    [setIsShareModalOpen]
+  );
+  const onSubmit = async () => {
+    await props.onSubmit();
+    toggleIsShareModalOpen();
+  };
+
+  return (
+    <>
+      <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
+        <i className="fa fa-share-alt mr-1" aria-hidden="true" />
+        Share
+      </Button>
+      <ShareModal
+        onSubmit={onSubmit}
+        isOpen={isShareModalOpen}
+        toggle={toggleIsShareModalOpen}
+      />
+    </>
   );
 }
