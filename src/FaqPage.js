@@ -42,18 +42,28 @@ const Arrow = ({ isOpen, ...props }) =>
   );
 
 function FAQ({ question, answer }) {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
+  // Note that there is a details and summary component,
+  // but Edge doesn't have support and no way to animate
+  // transitions. Default cursor is wrong too.
 
   return (
-    <div>
-      <button style={style} onClick={() => setIsOpen(prevState => !prevState)}>
-        <h2 className="h5">
-          <Arrow className="mr-1" isOpen={isOpen} />
-          {question}
-        </h2>
-      </button>
-      <Collapse isOpen={isOpen}>{answer}</Collapse>
-    </div>
+    <>
+      <dt>
+        <button
+          style={style}
+          onClick={() => setIsOpen(prevState => !prevState)}
+        >
+          <h2 className="h5">
+            <Arrow className="mr-1" isOpen={isOpen} />
+            {question}
+          </h2>
+        </button>
+      </dt>
+      <dd>
+        <Collapse isOpen={isOpen}>{answer}</Collapse>
+      </dd>
+    </>
   );
 }
 
@@ -66,10 +76,13 @@ function ExternalLink({ href, children, ...props }) {
 }
 
 function FaqList({ faqs }) {
-  // TODO: MAKE THIS A LIST
-  return faqs.map(faq => (
-    <FAQ key={faq.question} question={faq.question} answer={faq.answer} />
-  ));
+  return (
+    <dl>
+      {faqs.map(faq => (
+        <FAQ key={faq.question} question={faq.question} answer={faq.answer} />
+      ))}
+    </dl>
+  );
 }
 
 export default function FaqPage() {
