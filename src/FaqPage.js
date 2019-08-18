@@ -52,16 +52,19 @@ function FAQ({ question, answer }) {
       <dt>
         <button
           style={style}
+          className="border border-primary rounded-top bg-light d-block w-100"
           onClick={() => setIsOpen(prevState => !prevState)}
         >
-          <h2 className="h5">
+          <h2 className="h5 p-2 mb-0 text-left">
             <Arrow className="mr-1" isOpen={isOpen} />
             {question}
           </h2>
         </button>
       </dt>
-      <dd>
-        <Collapse isOpen={isOpen}>{answer}</Collapse>
+      <dd className="mb-4">
+        <Collapse isOpen={isOpen}>
+          <div className="bg-white border rounded-bottom"><div className="p-2 pb-3">{answer}</div></div>
+        </Collapse>
       </dd>
     </>
   );
