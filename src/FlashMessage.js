@@ -2,7 +2,6 @@ import React from "react";
 import { Location } from "@reach/router";
 import { Alert } from "reactstrap";
 
-// TODO: show icon based on success/failure
 export default function FlashMessage() {
   return (
     <Location>
@@ -10,7 +9,12 @@ export default function FlashMessage() {
         if (!state || !state.flashMessage) return null;
         const { color, message } = state.flashMessage;
 
-        return <Alert color={color}>{message}</Alert>;
+        return (
+          <Alert color={color}>
+            <i className="fa fa-check mr-1" aria-hidden="true" />
+            {message}
+          </Alert>
+        );
       }}
     </Location>
   );
