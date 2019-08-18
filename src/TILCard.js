@@ -3,20 +3,12 @@ import { Link } from "@reach/router";
 import { Card, CardBody, CardHeader, CardText } from "reactstrap";
 import ShareButton from "./ShareButton";
 
-function NewLinesToParagraphs({ children }) {
-  // These shouldn't be reordered so the index should be a safe key.
-  return children
-    .trim()
-    .split("\n")
-    .map((str, idx) => <p key={idx}>{str}</p>);
+function PreviewText({ children }) {
+  return children.trim().split("\n")[0] + "..";
 }
 
 // maybe make this an article? section?
 export default function TILCard({ title, children, className }) {
-  const onSubmit = () => {
-    // TODO: wait, flash message
-    return Promise.resolve();
-  };
   const encodedTitle = encodeURIComponent(title);
 
   return (
@@ -25,10 +17,10 @@ export default function TILCard({ title, children, className }) {
         <Link to={`/entries/${encodedTitle}`}>{title}</Link>
       </CardHeader>
       <CardBody>
-        <CardText tag="div">
-          <NewLinesToParagraphs>{children}</NewLinesToParagraphs>
+        <CardText tag="div" className="pb-2">
+          <PreviewText>{children}</PreviewText>
         </CardText>
-        <ShareButton onSubmit={onSubmit} />
+        <ShareButton />
       </CardBody>
     </Card>
   );

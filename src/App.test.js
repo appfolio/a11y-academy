@@ -54,7 +54,6 @@ describe("App", () => {
 
     fireEvent.click(getByText("Add New Entry"));
 
-    // TODO: change this to wait for the flash message instead
     await findByText("There were 3 problems with your form:");
 
     expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
@@ -115,6 +114,9 @@ describe("App", () => {
     });
     expect(getByText("Share TWL Entry")).not.toBeDisabled();
 
-    // TODO: test opening/closing modal
+    fireEvent.click(getByText("Share TWL Entry"));
+    expect(
+      getByText("Successfully shared article with hello@example.com")
+    ).toBeVisible();
   });
 });

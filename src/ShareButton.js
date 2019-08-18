@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   Button,
   Form,
   FormGroup,
@@ -88,19 +89,31 @@ function ShareModal({ onSubmit, ...props }) {
   );
 }
 
+function SuccessFlashMessage({ email }) {
+  return (
+    <Alert color="success">
+      <i className="fa fa-check mr-1" aria-hidden="true" />
+      Successfully shared article with {email}
+    </Alert>
+  );
+}
+
 export default function ShareButton(props) {
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
   const toggleIsShareModalOpen = React.useCallback(
     () => setIsShareModalOpen(prevState => !prevState),
     [setIsShareModalOpen]
   );
-  const onSubmit = async () => {
-    await props.onSubmit();
+
+  const [submittedEmail, setSubmittedEmail] = React.useState("");
+  const onSubmit = email => {
     toggleIsShareModalOpen();
+    setSubmittedEmail(email);
   };
 
   return (
     <>
+      {submittedEmail && <SuccessFlashMessage email={submittedEmail} />}
       <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
         <i className="fa fa-share-alt mr-1" aria-hidden="true" />
         Share
