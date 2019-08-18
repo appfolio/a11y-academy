@@ -9,7 +9,6 @@ import NewEntryForm from "./NewEntryForm";
 import ShowPage from "./ShowPage";
 import data from "./seeddata";
 
-
 function SkipNavLink({ skipId }) {
   return (
     <a className="sr-only sr-only-focusable" href={`#${skipId}`}>
@@ -28,9 +27,7 @@ function MainLayout({ children }) {
           <FlashMessage />
           {children}
         </main>
-        <footer className="py-3 mt-auto">
-          <span className="text-muted">Copyright AppFolio Inc.</span>
-        </footer>
+        <footer className="py-3 mt-auto">Copyright AppFolio Inc.</footer>
       </Container>
     </>
   );
