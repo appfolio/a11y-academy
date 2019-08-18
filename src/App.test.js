@@ -22,8 +22,20 @@ function renderWithRouter(
 describe("App", () => {
   afterEach(cleanup);
 
-  it("doesnt have any accessibility violations", async () => {
-    const { container } = render(<App />);
+  it("doesnt have any accessibility violations on index", async () => {
+    const { container } = renderWithRouter(<App />);
+    const { violations } = await axe.run(container);
+    expect(violations).toEqual([]);
+  });
+
+  it("doesnt have any accessibility violations on the faqs page", async () => {
+    const { container } = renderWithRouter(<App />, { route: "/faqs" });
+    const { violations } = await axe.run(container);
+    expect(violations).toEqual([]);
+  });
+
+  it("doesnt have any accessibility violations on the new entry page", async () => {
+    const { container } = renderWithRouter(<App />, { route: "/entries/new" });
     const { violations } = await axe.run(container);
     expect(violations).toEqual([]);
   });
