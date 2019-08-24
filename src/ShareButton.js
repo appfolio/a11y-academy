@@ -36,10 +36,8 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
   );
 }
 
-const ShareModalHeader = ({ children, className, ...props }) => (
-  <h3 className={`h5 ${className}`} {...props}>
-    {children}
-  </h3>
+const ShareModalHeader = ({ children, ...props }) => (
+  <h5 {...props}>{children}</h5>
 );
 
 function ShareModal({ onSubmit, ...props }) {
