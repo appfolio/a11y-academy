@@ -38,7 +38,6 @@ function ButtonWithTooltip({
       id={targetId}
       data-testid="button-with-tooltip-target"
       style={{ cursor: "not-allowed" }}
-      tabIndex={0}
     >
       <Button aria-describedby={tooltipId} disabled {...props}>
         {children}
