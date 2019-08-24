@@ -10,11 +10,6 @@ export default function MyNav() {
       </NavbarBrand>
       <Nav>
         <NavItem>
-          <NavLink tag={Link} to="/">
-            Login
-          </NavLink>
-        </NavItem>
-        <NavItem>
           <NavLink tag={Link} to="/faqs">
             FAQs
           </NavLink>
