@@ -19,7 +19,7 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
   return (
     // Note we don't need a title attribute due to visible text from tooltip
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-    <span id={targetId} className="d-inline-block" tabIndex={disabled ? 0 : -1}>
+    <span id={targetId} className="d-inline-block">
       <Button
         style={{ pointerEvents: disabled ? "none" : "inherit" }}
         disabled={disabled}
