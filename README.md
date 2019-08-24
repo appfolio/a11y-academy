@@ -1,68 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Developing for Accessibility
 
-## Available Scripts
+This repository covers the content for the Developing for Accessibility academy session.
 
-In the project directory, you can run:
+## #Goals of this Academy Class
 
-### `npm start`
+- Learn guiding principles for developing for accessiblity
+  - Use accessible HTML
+  - Use a pattern/component library so it's easy to be consistently accessible
+  - Automated tools make it easier to make your site accessible, but there's no substitute for manual testing
+- Learn how to use automated tools for developing accessible apps
+  - Static code analysis
+  - Automated tests
+  - Browser extensions
+- Learn to fix common accessibility mistakes
 
-Runs the app in the development mode.<br>
+## Starting the project
+
+The `fixme` branch has a bunch of accessibility violations to fix.
+
+This app is built on top of [Create React App](https://create-react-app.dev) and [Reactstrap](http://reactstrap.github.io/)
+
+### Install dependencies
+
+```
+npm install
+```
+
+### Start the app
+
+```
+npm start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `npm test`
+### Run tests
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start the test runner:
 
-### `npm run build`
+```
+npm test
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚠️ Fixing Violations
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- [Page Title](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
+- [Cards](https://inclusive-components.design/cards/)
+- [Skip navigation links](https://webaim.org/techniques/skipnav/)
+  - [Bootstrap screeen reader utilities](https://getbootstrap.com/docs/4.3/utilities/screen-readers/)
+- [Button](http://w3c.github.io/aria-practices/#button)
+  - Don't add click handlers to `<div>`s - just use a button 🙂
+- [Link](http://w3c.github.io/aria-practices/#link)
+  - Links are great for navigating to another page or to a section of the current page. Links != buttons
+- [Main landmark](http://w3c.github.io/aria-practices/#aria_lh_main)
+- [Forms](http://w3c.github.io/aria-practices/#aria_lh_form)
+  - `<label>`
+    - Placeholders are not labels
+    - `<label>` and `<input>` need to be siblings because of [Bootstrap](https://getbootstrap.com/docs/4.0/components/forms/#checkboxes-and-radios)
+  - [Grouping items in select elements](https://www.w3.org/WAI/tutorials/forms/grouping/#grouping-items-in-select-elements)
+- [Disclosure](http://w3c.github.io/aria-practices/#disclosure)
+  - An element for hiding text
+- [Tooltips](http://w3c.github.io/aria-practices/#tooltip)
+  - Need to be accessible by keyboard
+- [Tables](http://w3c.github.io/aria-practices/#table)
+  - main focus is using semantic HTML
+- [Images](https://www.w3.org/WAI/tutorials/images/)
+- [Page Language](https://www.w3.org/TR/WCAG20-TECHS/H57.html)
+- [aria-hidden](https://www.w3.org/TR/wai-aria-1.1/#aria-hidden)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎓 Resources
 
-### `npm run eject`
+### Learn More
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/)
+- [WCAG Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG21/)
+- [Web Accessibility Tutorials](https://www.w3.org/WAI/tutorials/)
+- [a11y project](https://a11yproject.com)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Browser Tools/Extensions
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [axe](https://www.deque.com/axe/) (Chrome, Firefox)
+- [WAVE Browser Extensions](https://wave.webaim.org/extension/) (Chrome, Firefox)
+- [Accessibility Insights](https://accessibilityinsights.io) (Chrome)
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse/) (built into Chrome)
+- [Web Inspector Audits](https://webkit.org/blog/8935/audits-in-web-inspector/) (built into Safari Technology Preview)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Development
 
-## Learn More
+- [eslint-plulgin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) - ESLint plugin for accessibility rules on JSX elements
+- [axe-core](https://github.com/dequelabs/axe-core) - an accessibility testing engine
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Other Stuff
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [VoiceOver Keyboard Shortcuts on a Mac](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project was inspired by Marcy Sutton's [Empathy Driven Development](https://github.com/marcysutton/empathy-driven-development) project and her [talk at JSConf EU 2018](https://www.youtube.com/watch?v=l95VFLj3e2w).
