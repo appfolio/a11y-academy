@@ -52,13 +52,8 @@ function ButtonWithTooltip({
 
 const ShareModalHeader = ({
   children,
-  className,
   ...props
-}: React.ComponentPropsWithoutRef<"h3">) => (
-  <h3 className={`h5 ${className}`} {...props}>
-    {children}
-  </h3>
-);
+}: React.ComponentPropsWithoutRef<"h3">) => <h5 {...props}>{children}</h5>;
 
 type ShareModalProps = Omit<ModalProps, "onSubmit"> & {
   onSubmit: (email: string) => void;
