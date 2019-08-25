@@ -54,6 +54,7 @@ function FAQ({ question, answer }) {
           style={style}
           className="border border-primary rounded-top bg-light d-block w-100"
           onClick={() => setIsOpen(prevState => !prevState)}
+          aria-expanded={isOpen}
         >
           <h2 className="h5 p-2 mb-0 text-left">
             <Arrow className="mr-1" isOpen={isOpen} />
