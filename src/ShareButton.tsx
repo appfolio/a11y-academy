@@ -82,7 +82,6 @@ function ShareModal({ onSubmit, ...props }: ShareModalProps) {
             closes.
           </p>
           <FormGroup>
-            <Label htmlFor="email-input">Email</Label>
             <Input
               type="email"
               id="email-input"
