@@ -113,7 +113,7 @@ export default function ShareButton(props) {
     <>
       {submittedEmail && <SuccessFlashMessage email={submittedEmail} />}
       <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
-        <i className="fa fa-share-alt mr-1" aria-hidden="true" />
+        <i className="fa fa-share-alt mr-1" />
         Share
       </Button>
       <ShareModal
