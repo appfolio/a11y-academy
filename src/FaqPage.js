@@ -64,7 +64,9 @@ function FAQ({ question, answer }) {
       </dt>
       <dd className="mb-4">
         <Collapse isOpen={isOpen}>
-          <div className="bg-white border rounded-bottom"><div className="p-2 pb-3">{answer}</div></div>
+          <div className="bg-white border rounded-bottom">
+            <div className="p-2 pb-3">{answer}</div>
+          </div>
         </Collapse>
       </dd>
     </>
