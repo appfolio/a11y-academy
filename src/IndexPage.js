@@ -1,4 +1,3 @@
-import { Link } from "@reach/router";
 import React from "react";
 import { Button, Jumbotron } from "reactstrap";
 import TILCard from "./TILCard";
@@ -14,7 +13,7 @@ function BannerImage() {
     </Jumbotron>
   );
 }
-export default function IndexPage({ entries }) {
+export default function IndexPage({ navigate, entries }) {
   React.useEffect(() => {
     document.title = "Today We Learned";
   }, []);
@@ -33,8 +32,9 @@ export default function IndexPage({ entries }) {
         className="btn-block mb-5 text-decoration-none"
         color="primary"
         size="lg"
-        tag={Link}
-        to="/entries/new"
+        onClick={() => {
+          navigate("/entries/new");
+        }}
       >
         Add New Entry
       </Button>
