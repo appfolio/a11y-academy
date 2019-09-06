@@ -101,9 +101,9 @@ export default function NewEntryForm(props: NewEntryFormProps) {
 
   return (
     <Form onSubmit={onSubmit} noValidate>
-      <h1>
+      <h2>
         New <abbr title="Today We Learned">TWL</abbr> Entry
-      </h1>
+      </h2>
       <ErrorBanner errorMessages={Object.values(errors)} />
 
       <p>
