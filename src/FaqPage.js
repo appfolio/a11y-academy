@@ -50,8 +50,7 @@ function FAQ({ question, answer }) {
   return (
     <>
       <dt>
-        <button
-          style={style}
+        <div
           className="border border-primary rounded-top bg-light d-block w-100"
           onClick={() => setIsOpen((prevState) => !prevState)}
           aria-expanded={isOpen}
@@ -60,7 +59,7 @@ function FAQ({ question, answer }) {
             <Arrow className="mr-1" isOpen={isOpen} />
             {question}
           </h5>
-        </button>
+        </div>
       </dt>
       <dd className="mb-4">
         <Collapse isOpen={isOpen}>
