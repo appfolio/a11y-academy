@@ -97,7 +97,7 @@ export default function NewEntryForm(props) {
       </p>
 
       <FormGroup>
-        <Label htmlFor="new-entry-form-title">Title</Label>
+        <Label>Title</Label>
         <Input
           id="new-entry-form-title"
           name="title"
