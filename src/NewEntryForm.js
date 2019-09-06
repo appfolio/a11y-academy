@@ -133,7 +133,6 @@ export default function NewEntryForm(props) {
           return (
             <CustomInput
               checked={color === favoriteColor}
-              htmlFor={id}
               id={id}
               invalid={!!errors.favoriteColor}
               key={color}
