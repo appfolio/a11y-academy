@@ -17,7 +17,6 @@ function BannerImage() {
     <Jumbotron>
       <img
         src="https://www.nps.gov/common/uploads/banner_image/pwr/homepage/F836E601-1DD8-B71B-0BC2936CDBC2FC26.jpg?width=2400&height=700&mode=crop&quality=90"
-        alt="Joshua Tree"
         className="img-fluid"
       />
     </Jumbotron>
