@@ -56,10 +56,10 @@ function FAQ({ question, answer }) {
           onClick={() => setIsOpen((prevState) => !prevState)}
           aria-expanded={isOpen}
         >
-          <h2 className="h5 p-2 mb-0 text-left">
+          <h5 className="p-2 mb-0 text-left">
             <Arrow className="mr-1" isOpen={isOpen} />
             {question}
-          </h2>
+          </h5>
         </button>
       </dt>
       <dd className="mb-4">
