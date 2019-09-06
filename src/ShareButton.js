@@ -112,10 +112,17 @@ export default function ShareButton(props) {
   return (
     <>
       {submittedEmail && <SuccessFlashMessage email={submittedEmail} />}
-      <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
+      <a
+        href="#"
+        className="p-0"
+        onClick={e => {
+          e.preventDefault();
+          toggleIsShareModalOpen();
+        }}
+      >
         <i className="fa fa-share-alt mr-1" />
         Share
-      </Button>
+      </a>
       <ShareModal
         onSubmit={onSubmit}
         isOpen={isShareModalOpen}
