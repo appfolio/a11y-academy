@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { Button } from "reactstrap";
 import TILCard from "./TILCard";
@@ -33,6 +33,8 @@ export default function IndexPage({ entries }: IndexPageProps) {
     document.title = "Today We Learned";
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <header>
@@ -47,8 +49,9 @@ export default function IndexPage({ entries }: IndexPageProps) {
         className="btn-block mb-5 text-decoration-none"
         color="primary"
         size="lg"
-        tag={Link}
-        to="/entries/new"
+        onClick={() => {
+          navigate("/entries/new");
+        }}
       >
         Add New Entry
       </Button>
