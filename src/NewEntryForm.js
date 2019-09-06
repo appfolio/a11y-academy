@@ -16,7 +16,7 @@ import {
 function GroupedSelectInput({ id, label, groupedOptions, ...props }) {
   return (
     <FormGroup>
-      <Label for={id}>{label}</Label>
+      <span>{label}</span>
       <Input id={id} type="select" required {...props}>
         {groupedOptions.map(({ group, options }) => (
           <optgroup key={group} label={group}>
