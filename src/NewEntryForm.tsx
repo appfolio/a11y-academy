@@ -128,12 +128,12 @@ export default function NewEntryForm(props: NewEntryFormProps) {
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="new-entry-form-body">Body</Label>
         <Input
           id="new-entry-form-body"
           name="body"
           type="textarea"
           required
+          placeholder="Today we learned..."
           onChange={onBodyChange}
           invalid={!!errors.body}
           value={body}
