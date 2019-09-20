@@ -4,12 +4,12 @@ import {
   Button,
   Form,
   FormGroup,
-  Label,
   Input,
+  Label,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
+  ModalHeader,
   UncontrolledTooltip
 } from "reactstrap";
 
@@ -17,7 +17,8 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
   const targetId = "button-with-tooltip-target";
 
   return (
-    // Note we don't need a title attribute due to visible text
+    // Note we don't need a title attribute due to visible text from tooltip
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     <span id={targetId} className="d-inline-block" tabIndex={disabled ? 0 : -1}>
       <Button
         style={{ pointerEvents: disabled ? "none" : "inherit" }}
