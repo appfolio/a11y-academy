@@ -2,23 +2,28 @@
 
 This repository covers the content for the Developing for Accessibility academy session.
 
-## #Goals of this Academy Class
+This app is built on top of [Create React App](https://create-react-app.dev) and [Reactstrap](http://reactstrap.github.io/)
+
+## 🏅 #Goals/Learning Outcomes
 
 - Learn guiding principles for developing for accessiblity
   - Use accessible HTML
   - Use a pattern/component library so it's easy to be consistently accessible
-  - Automated tools make it easier to make your site accessible, but there's no substitute for manual testing
+  - Use automated tools to test the accessibility of your app
+  - Manually audit your site because automated tools can't catch everything 😅
 - Learn how to use automated tools for developing accessible apps
   - Static code analysis
   - Automated tests
   - Browser extensions
 - Learn to fix common accessibility mistakes
 
-## Starting the project
+## 🚀 Starting the project
 
 The `fixme` branch has a bunch of accessibility violations to fix.
 
-This app is built on top of [Create React App](https://create-react-app.dev) and [Reactstrap](http://reactstrap.github.io/)
+```
+git checkout fixme
+```
 
 ### Install dependencies
 
@@ -36,9 +41,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
+### Run the linter
+
+```
+npm run lint
+```
+
 ### Run tests
 
-Start the test runner:
+This project uses [axe-core](https://github.com/dequelabs/axe-core) to automate accessibility testing.
 
 ```
 npm test
@@ -50,20 +61,16 @@ npm test
 - [Cards](https://inclusive-components.design/cards/)
 - [Skip navigation links](https://webaim.org/techniques/skipnav/)
   - [Bootstrap screeen reader utilities](https://getbootstrap.com/docs/4.3/utilities/screen-readers/)
-- [Button](http://w3c.github.io/aria-practices/#button)
-  - Don't add click handlers to `<div>`s - just use a button 🙂
-- [Link](http://w3c.github.io/aria-practices/#link)
-  - Links are great for navigating to another page or to a section of the current page. Links != buttons
+- [Button](http://w3c.github.io/aria-practices/#button) - don't add click handlers to `<div>`s - just use a button 🙂
+- [Link](http://w3c.github.io/aria-practices/#link) - great for navigating to another page or to a section of the current page. Links != buttons
 - [Main landmark](http://w3c.github.io/aria-practices/#aria_lh_main)
 - [Forms](http://w3c.github.io/aria-practices/#aria_lh_form)
   - `<label>`
     - Placeholders are not labels
     - `<label>` and `<input>` need to be siblings because of [Bootstrap](https://getbootstrap.com/docs/4.0/components/forms/#checkboxes-and-radios)
   - [Grouping items in select elements](https://www.w3.org/WAI/tutorials/forms/grouping/#grouping-items-in-select-elements)
-- [Disclosure](http://w3c.github.io/aria-practices/#disclosure)
-  - An element for hiding text
+- [Disclosure](http://w3c.github.io/aria-practices/#disclosure) - an element for showing and hiding text
 - [Tooltips](http://w3c.github.io/aria-practices/#tooltip)
-  - Need to be accessible by keyboard
 - [Tables](http://w3c.github.io/aria-practices/#table)
   - main focus is using semantic HTML
 - [Images](https://www.w3.org/WAI/tutorials/images/)
@@ -75,7 +82,7 @@ npm test
 ### Learn More
 
 - [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/)
-- [WCAG Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG21/)
+- [Web Content Accessibility (WCAG) Guidelines 2.1](https://www.w3.org/TR/WCAG21/)
 - [Web Accessibility Tutorials](https://www.w3.org/WAI/tutorials/)
 - [a11y project](https://a11yproject.com)
 
@@ -91,6 +98,11 @@ npm test
 
 - [eslint-plulgin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) - ESLint plugin for accessibility rules on JSX elements
 - [axe-core](https://github.com/dequelabs/axe-core) - an accessibility testing engine
+
+### Other libraries
+
+- [@reach/router](https://reach.tech/router) - A client side router that automatically manages focus
+- [React Testing Libary](https://testing-library.com/docs/react-testing-library/intro) - a general purpose testing library for React (replacement for Enzyme) with accessibility as a first class concern
 
 ### Other Stuff
 
