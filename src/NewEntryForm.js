@@ -156,13 +156,22 @@ export default function NewEntryForm(props) {
         label="Pick your Team"
         value={team}
         groupedOptions={[
-          { group: "Curie", options: ["Dude, where's my Char?", "Error Bud"] },
+          {
+            group: "Curie",
+            options: [
+              "Dude, where's my Char?",
+              "Error Bud",
+              "The Printf Bride",
+              "Concat in the Hat"
+            ]
+          },
           {
             group: "Copernicus",
             options: [
               "The Empire Strikes Backlog",
               "The Phantom Reference",
-              "Force Push Awakens"
+              "Force Push Awakens",
+              "A Gnu Hope"
             ]
           }
         ]}
