@@ -100,7 +100,7 @@ export default function NewEntryForm(props: NewEntryFormProps) {
   };
 
   return (
-    <Form onSubmit={onSubmit} noValidate>
+    <Form noValidate>
       <h2>
         New <abbr title="Today We Learned">TWL</abbr> Entry
       </h2>
@@ -199,7 +199,7 @@ export default function NewEntryForm(props: NewEntryFormProps) {
       />
 
       <ButtonToolbar>
-        <Button color="primary" type="submit">
+        <Button onClick={onSubmit}  color="primary" >
           Add New Entry
         </Button>
         <Button className="ms-2 text-decoration-none" tag={Link} to="/">
