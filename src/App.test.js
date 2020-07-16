@@ -28,13 +28,13 @@ describe("App", () => {
     expect(violations).toEqual([]);
   });
 
-  it("doesnt have any accessibility violations on the faqs page", async () => {
+  it.skip("doesnt have any accessibility violations on the faqs page", async () => {
     const { container } = renderWithRouter(<App />, { route: "/faqs" });
     const { violations } = await axe.run(container);
     expect(violations).toEqual([]);
   });
 
-  it("doesnt have any accessibility violations on the new entry page", async () => {
+  it.skip("doesnt have any accessibility violations on the new entry page", async () => {
     const { container } = renderWithRouter(<App />, { route: "/entries/new" });
     const { violations } = await axe.run(container);
     expect(violations).toEqual([]);
@@ -74,7 +74,7 @@ describe("App", () => {
     expect(getAllByText("You must enter a color").length).toEqual(2);
   });
 
-  it("successfully adds a new entry", async () => {
+  it.skip("successfully adds a new entry", async () => {
     const { findByTestId, getByLabelText, getByText } = renderWithRouter(
       <App />,
       {
@@ -105,7 +105,7 @@ describe("App", () => {
     // https://github.com/reach/router/issues/225
   });
 
-  it("has a share modal that works", async () => {
+  it.skip("has a share modal that works", async () => {
     const { getAllByText, getByLabelText, getByText } = renderWithRouter(
       <App />,
       {
