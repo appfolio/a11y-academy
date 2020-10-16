@@ -1,7 +1,7 @@
 import {
   createHistory,
   createMemorySource,
-  LocationProvider
+  LocationProvider,
 } from "@reach/router";
 import "@testing-library/jest-dom/extend-expect";
 import { cleanup, fireEvent, render } from "@testing-library/react";
@@ -15,7 +15,7 @@ function renderWithRouter(
 ) {
   return {
     ...render(<LocationProvider history={history}>{ui}</LocationProvider>),
-    history
+    history,
   };
 }
 
@@ -44,7 +44,7 @@ describe("App", () => {
     const {
       container,
       getByRole,
-      history: { navigate }
+      history: { navigate },
     } = renderWithRouter(<App />);
 
     expect(container.innerHTML).toMatch("Today We Learned");
@@ -60,7 +60,7 @@ describe("App", () => {
     const { getByRole, getAllByText, getByText, findByText } = renderWithRouter(
       <App />,
       {
-        route: "/entries/new"
+        route: "/entries/new",
       }
     );
 
@@ -78,7 +78,7 @@ describe("App", () => {
     const { findByTestId, getByLabelText, getByText } = renderWithRouter(
       <App />,
       {
-        route: "/entries/new"
+        route: "/entries/new",
       }
     );
 
@@ -88,7 +88,7 @@ describe("App", () => {
 
     const bodyInput = getByLabelText("Body");
     fireEvent.change(bodyInput, {
-      target: { value: "Kiss me thru the phone" }
+      target: { value: "Kiss me thru the phone" },
     });
     expect(bodyInput.value).toBe("Kiss me thru the phone");
 
@@ -109,7 +109,7 @@ describe("App", () => {
     const { getAllByText, getByLabelText, getByText } = renderWithRouter(
       <App />,
       {
-        route: "/"
+        route: "/",
       }
     );
 
@@ -122,7 +122,7 @@ describe("App", () => {
     expect(getByText("Share TWL Entry")).toBeDisabled();
 
     fireEvent.change(getByLabelText("Email"), {
-      target: { value: "hello@example.com" }
+      target: { value: "hello@example.com" },
     });
     expect(getByText("Share TWL Entry")).not.toBeDisabled();
 

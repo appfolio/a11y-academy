@@ -10,7 +10,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  UncontrolledTooltip
+  UncontrolledTooltip,
 } from "reactstrap";
 
 function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
@@ -49,7 +49,7 @@ function ShareModal({ onSubmit, ...props }) {
   return (
     <Modal {...props}>
       <Form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           onSubmit(email);
         }}
@@ -70,7 +70,7 @@ function ShareModal({ onSubmit, ...props }) {
               type="email"
               id="email-input"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="first.last@example.com"
             />
           </FormGroup>
@@ -102,12 +102,12 @@ function SuccessFlashMessage({ email }) {
 export default function ShareButton(props) {
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
   const toggleIsShareModalOpen = React.useCallback(
-    () => setIsShareModalOpen(prevState => !prevState),
+    () => setIsShareModalOpen((prevState) => !prevState),
     [setIsShareModalOpen]
   );
 
   const [submittedEmail, setSubmittedEmail] = React.useState("");
-  const onSubmit = email => {
+  const onSubmit = (email) => {
     toggleIsShareModalOpen();
     setSubmittedEmail(email);
   };

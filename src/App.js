@@ -34,14 +34,14 @@ function MainLayout({ children }) {
 }
 
 function App({ location, navigate }) {
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     const { title, body, favoriteColor, team } = data;
 
     const errors = {
       title: title.length > 0 ? null : "You must enter a title",
       body: body.length > 0 ? null : "You must enter a body",
       favoriteColor: favoriteColor ? null : "You must enter a color",
-      team: team ? null : "You must enter a team"
+      team: team ? null : "You must enter a team",
     };
 
     if (!(errors.title || errors.body || errors.favoriteColor || errors.team)) {
@@ -49,9 +49,9 @@ function App({ location, navigate }) {
         state: {
           flashMessage: {
             color: "success",
-            message: "Successfully added new entry"
-          }
-        }
+            message: "Successfully added new entry",
+          },
+        },
       });
     }
     return errors;

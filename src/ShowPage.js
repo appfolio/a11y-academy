@@ -10,14 +10,14 @@ function NewLinesToParagraphs({ children }) {
 
 export default function ShowPage({ title: encodedTitle, entries }) {
   const title = React.useMemo(() => decodeURIComponent(encodedTitle), [
-    encodedTitle
+    encodedTitle,
   ]);
 
   React.useEffect(() => {
     document.title = title;
   }, [title]);
 
-  const entry = entries.find(entry => entry.title === title);
+  const entry = entries.find((entry) => entry.title === title);
   return (
     <>
       <h1>{title}</h1>

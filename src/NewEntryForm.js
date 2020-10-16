@@ -10,7 +10,7 @@ import {
   FormGroup,
   FormText,
   Input,
-  Label
+  Label,
 } from "reactstrap";
 
 function GroupedSelectInput({ id, label, groupedOptions, ...props }) {
@@ -20,7 +20,7 @@ function GroupedSelectInput({ id, label, groupedOptions, ...props }) {
       <Input id={id} type="select" required {...props}>
         {groupedOptions.map(({ group, options }) => (
           <optgroup key={group} label={group}>
-            {options.map(option => (
+            {options.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -36,12 +36,12 @@ function useInputState(initialState) {
   const [state, setState] = React.useState(initialState);
   return [
     state,
-    React.useCallback(({ target: { value } }) => setState(value), [setState])
+    React.useCallback(({ target: { value } }) => setState(value), [setState]),
   ];
 }
 
 function ErrorBanner({ errorMessages }) {
-  const messages = errorMessages.filter(e => e);
+  const messages = errorMessages.filter((e) => e);
 
   if (messages.length === 0) return null;
 
@@ -49,7 +49,7 @@ function ErrorBanner({ errorMessages }) {
     <Alert color="danger">
       <p>There were {messages.length} problems with your form:</p>
       <ul>
-        {messages.map(m => (
+        {messages.map((m) => (
           <li key={m}>{m}</li>
         ))}
       </ul>
@@ -66,7 +66,7 @@ export default function NewEntryForm(props) {
     title: null,
     body: null,
     favoriteColor: null,
-    team: null
+    team: null,
   });
 
   const [title, onTitleChange] = useInputState("");
@@ -74,11 +74,11 @@ export default function NewEntryForm(props) {
   const [favoriteColor, onFavoriteColorChange] = useInputState("");
   const [team, onTeamChange] = useInputState("Dude, where's my Char?");
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     // set flash message state if false
-    props.onSubmit({ title, body, favoriteColor, team }).then(err => {
-      if (Object.values(err).some(v => v)) setErrors(err);
+    props.onSubmit({ title, body, favoriteColor, team }).then((err) => {
+      if (Object.values(err).some((v) => v)) setErrors(err);
     });
   };
 
@@ -127,7 +127,7 @@ export default function NewEntryForm(props) {
       <FormGroup tag="fieldset">
         <legend className="col-form-label">Pick your favorite color</legend>
 
-        {["Blue", "Green", "Orange", "Yellow"].map(color => {
+        {["Blue", "Green", "Orange", "Yellow"].map((color) => {
           const id = `radio-color-${color}`;
 
           return (
@@ -162,8 +162,8 @@ export default function NewEntryForm(props) {
               "Dude, where's my Char?",
               "Error Bud",
               "The Printf Bride",
-              "Concat in the Hat"
-            ]
+              "Concat in the Hat",
+            ],
           },
           {
             group: "Copernicus",
@@ -171,9 +171,9 @@ export default function NewEntryForm(props) {
               "The Empire Strikes Backlog",
               "The Phantom Reference",
               "Force Push Awakens",
-              "A Gnu Hope"
-            ]
-          }
+              "A Gnu Hope",
+            ],
+          },
         ]}
       />
 

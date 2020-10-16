@@ -5,20 +5,20 @@ const faqs = [
   {
     question: "What's this for?",
     answer:
-      "A bunch of write ups about something a team learned. Failure is ok as long as we learn from it!"
+      "A bunch of write ups about something a team learned. Failure is ok as long as we learn from it!",
   },
   {
     question: "What's your favorite color?",
-    answer: "Green, obviously"
+    answer: "Green, obviously",
   },
   {
     question: "What's Soulja Boy's best song?",
-    answer: "Of course it's Kiss Me Thru The Phone"
+    answer: "Of course it's Kiss Me Thru The Phone",
   },
   {
     question: "Is Ted Cruz the Zodiac Killer?",
-    answer: "duh"
-  }
+    answer: "duh",
+  },
 ];
 
 const style = {
@@ -27,7 +27,7 @@ const style = {
   color: "inherit",
   cursor: "pointer",
   font: "inherit",
-  padding: 0
+  padding: 0,
 };
 
 const Arrow = ({ isOpen, ...props }) =>
@@ -53,7 +53,7 @@ function FAQ({ question, answer }) {
         <button
           style={style}
           className="border border-primary rounded-top bg-light d-block w-100"
-          onClick={() => setIsOpen(prevState => !prevState)}
+          onClick={() => setIsOpen((prevState) => !prevState)}
           aria-expanded={isOpen}
         >
           <h2 className="h5 p-2 mb-0 text-left">
@@ -84,7 +84,7 @@ function ExternalLink({ href, children, ...props }) {
 function FaqList({ faqs }) {
   return (
     <dl>
-      {faqs.map(faq => (
+      {faqs.map((faq) => (
         <FAQ key={faq.question} question={faq.question} answer={faq.answer} />
       ))}
     </dl>

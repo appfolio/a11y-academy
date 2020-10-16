@@ -39,7 +39,7 @@ export default function IndexPage({ entries }) {
         Add New Entry
       </Button>
       <ul className="list-unstyled">
-        {entries.map(entry => (
+        {entries.map((entry) => (
           <li key={entry.title}>
             <TILCard className="mb-3" title={entry.title} author={entry.author}>
               {entry.body}
