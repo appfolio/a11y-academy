@@ -113,7 +113,7 @@ function ShareModal({ onSubmit, ...props }: ShareModalProps) {
 function SuccessFlashMessage({ email }: { email: string }) {
   return (
     <Alert color="success">
-      <i className="fa fa-check mr-1" aria-hidden="true" />
+      <i className="fa fa-check me-1" aria-hidden="true" />
       Successfully shared article with {email}
     </Alert>
   );
@@ -136,7 +136,7 @@ export default function ShareButton() {
     <>
       {submittedEmail && <SuccessFlashMessage email={submittedEmail} />}
       <Button className="p-0" color="link" onClick={toggleIsShareModalOpen}>
-        <i className="fa fa-share-alt mr-1" aria-hidden="true" />
+        <i className="fa fa-share-alt me-1" aria-hidden="true" />
         Share
       </Button>
       <ShareModal

@@ -1,8 +1,16 @@
 import { Link, RouteComponentProps } from "@reach/router";
 import React from "react";
-import { Button, Jumbotron } from "reactstrap";
+import { Button } from "reactstrap";
 import TILCard from "./TILCard";
 import type { Entry } from "./sharedTypes";
+
+function Jumbotron(props: { children: React.ReactElement }) {
+  return (
+    <div className="p-5 mb-4 bg-light rounded-3">
+      <div className="container-fluid py-5">{props.children}</div>
+    </div>
+  );
+}
 
 function BannerImage() {
   return (

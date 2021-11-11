@@ -17,7 +17,7 @@ import data from "./seeddata.json";
 
 function SkipNavLink({ skipId }: { skipId: string }) {
   return (
-    <a className="sr-only sr-only-focusable" href={`#${skipId}`}>
+    <a className="visually-hidden-focusable" href={`#${skipId}`}>
       Skip to content
     </a>
   );

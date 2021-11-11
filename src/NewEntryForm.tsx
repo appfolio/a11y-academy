@@ -4,7 +4,6 @@ import {
   Alert,
   Button,
   ButtonToolbar,
-  CustomInput,
   Form,
   FormFeedback,
   FormGroup,
@@ -145,18 +144,22 @@ export default function NewEntryForm(props: NewEntryFormProps) {
           const id = `radio-color-${color}`;
 
           return (
-            <CustomInput
-              checked={color === favoriteColor}
-              id={id}
-              invalid={!!errors.favoriteColor}
-              key={color}
-              label={color}
-              name="color"
-              onChange={onFavoriteColorChange}
-              required
-              type="radio"
-              value={color}
-            />
+            <FormGroup key={color} check>
+              <Input
+                checked={color === favoriteColor}
+                id={id}
+                invalid={!!errors.favoriteColor}
+                name="color"
+                onChange={onFavoriteColorChange}
+                required
+                type="radio"
+                value={color}
+              />
+
+              <Label htmlFor={id} check>
+                {color}
+              </Label>
+            </FormGroup>
           );
         })}
         <FormText color="danger">{errors.favoriteColor}</FormText>
@@ -195,7 +198,7 @@ export default function NewEntryForm(props: NewEntryFormProps) {
         <Button color="primary" type="submit">
           Add New Entry
         </Button>
-        <Button className="ml-2 text-decoration-none" tag={Link} to="/">
+        <Button className="ms-2 text-decoration-none" tag={Link} to="/">
           Cancel
         </Button>
       </ButtonToolbar>

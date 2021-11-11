@@ -20,7 +20,7 @@ export default function FlashMessage() {
 
         return (
           <Alert color={color}>
-            <i className="fa fa-check mr-1" aria-hidden="true" />
+            <i className="fa fa-check me-1" aria-hidden="true" />
             {message}
           </Alert>
         );
