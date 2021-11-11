@@ -1,3 +1,4 @@
+import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { Collapse } from "reactstrap";
 
@@ -30,7 +31,11 @@ const style = {
   padding: 0,
 };
 
-const Arrow = ({ isOpen, ...props }) =>
+type ArrowProps = {
+  isOpen: boolean;
+} & React.ComponentPropsWithoutRef<"span">;
+
+const Arrow = ({ isOpen, ...props }: ArrowProps) =>
   isOpen ? (
     <span {...props} role="img" aria-label="down arrow">
       ⬇️
@@ -41,7 +46,12 @@ const Arrow = ({ isOpen, ...props }) =>
     </span>
   );
 
-function FAQ({ question, answer }) {
+type FAQProps = {
+  question: string;
+  answer: string;
+};
+
+function FAQ({ question, answer }: FAQProps) {
   const [isOpen, setIsOpen] = React.useState(true);
   // Note that there is a details and summary component,
   // but Edge doesn't have support and no way to animate
@@ -73,7 +83,11 @@ function FAQ({ question, answer }) {
   );
 }
 
-function ExternalLink({ href, children, ...props }) {
+function ExternalLink({
+  href,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"a">) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
       {children}
@@ -81,7 +95,7 @@ function ExternalLink({ href, children, ...props }) {
   );
 }
 
-function FaqList({ faqs }) {
+function FaqList({ faqs }: { faqs: FAQProps[] }) {
   return (
     <dl>
       {faqs.map((faq) => (
@@ -91,7 +105,7 @@ function FaqList({ faqs }) {
   );
 }
 
-export default function FaqPage() {
+export default function FaqPage(_props: RouteComponentProps) {
   React.useEffect(() => {
     document.title = "Frequently Asked Questions";
   }, []);

@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import { Link, RouteComponentProps } from "@reach/router";
 import React from "react";
 import {
   Alert,
@@ -9,11 +9,22 @@ import {
   FormFeedback,
   FormGroup,
   FormText,
+  InputProps,
   Input,
   Label,
 } from "reactstrap";
+import type { NewEntry, NewEntryErrors } from "./sharedTypes";
 
-function GroupedSelectInput({ id, label, groupedOptions, ...props }) {
+type GroupedSelectInputProps = {
+  groupedOptions: { group: string; options: string[] }[];
+} & InputProps;
+
+function GroupedSelectInput({
+  id,
+  label,
+  groupedOptions,
+  ...props
+}: GroupedSelectInputProps) {
   return (
     <FormGroup>
       <Label for={id}>{label}</Label>
@@ -32,22 +43,26 @@ function GroupedSelectInput({ id, label, groupedOptions, ...props }) {
   );
 }
 
-function useInputState(initialState) {
+function useInputState(initialState: string) {
   const [state, setState] = React.useState(initialState);
   return [
     state,
     React.useCallback(({ target: { value } }) => setState(value), [setState]),
-  ];
+  ] as const;
 }
 
-function ErrorBanner({ errorMessages }) {
+type ErrorBannerProps = {
+  errorMessages: (string | null)[];
+};
+
+function ErrorBanner({ errorMessages }: ErrorBannerProps) {
   const messages = errorMessages.filter((e) => e);
 
   if (messages.length === 0) return null;
 
   return (
     <Alert color="danger">
-      <p>There were {messages.length} problems with your form:</p>
+      <p>There were {messages.length} problem(s) with your form:</p>
       <ul>
         {messages.map((m) => (
           <li key={m}>{m}</li>
@@ -57,24 +72,23 @@ function ErrorBanner({ errorMessages }) {
   );
 }
 
-export default function NewEntryForm(props) {
+export type NewEntryFormProps = RouteComponentProps & {
+  onSubmit: (entry: NewEntry) => Promise<NewEntryErrors>;
+};
+
+export default function NewEntryForm(props: NewEntryFormProps) {
   React.useEffect(() => {
     document.title = "New TWL Entry";
   }, []);
 
-  const [errors, setErrors] = React.useState({
-    title: null,
-    body: null,
-    favoriteColor: null,
-    team: null,
-  });
+  const [errors, setErrors] = React.useState<NewEntryErrors>({});
 
   const [title, onTitleChange] = useInputState("");
   const [body, onBodyChange] = useInputState("");
   const [favoriteColor, onFavoriteColorChange] = useInputState("");
   const [team, onTeamChange] = useInputState("Dude, where's my Char?");
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     // set flash message state if false
     props.onSubmit({ title, body, favoriteColor, team }).then((err) => {

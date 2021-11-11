@@ -2,6 +2,7 @@ import React from "react";
 import {
   Alert,
   Button,
+  ButtonProps,
   Form,
   FormGroup,
   Input,
@@ -10,10 +11,20 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  ModalProps,
   UncontrolledTooltip,
 } from "reactstrap";
 
-function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
+type ButtonWithTooltipProps = {
+  toolTipText: string;
+} & ButtonProps;
+
+function ButtonWithTooltip({
+  children,
+  disabled,
+  toolTipText,
+  ...props
+}: ButtonWithTooltipProps) {
   const targetId = "button-with-tooltip-target";
 
   return (
@@ -36,13 +47,22 @@ function ButtonWithTooltip({ children, disabled, toolTipText, ...props }) {
   );
 }
 
-const ShareModalHeader = ({ children, className, ...props }) => (
+const ShareModalHeader = ({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"h3">) => (
   <h3 className={`h5 ${className}`} {...props}>
     {children}
   </h3>
 );
 
-function ShareModal({ onSubmit, ...props }) {
+type ShareModalProps = Omit<ModalProps, "onSubmit"> & {
+  onSubmit: (email: string) => void;
+  toggle: () => void;
+};
+
+function ShareModal({ onSubmit, ...props }: ShareModalProps) {
   const [email, setEmail] = React.useState("");
   const isEmailValid = /\S+@\S+\.\S+/.test(email);
 
@@ -90,7 +110,7 @@ function ShareModal({ onSubmit, ...props }) {
   );
 }
 
-function SuccessFlashMessage({ email }) {
+function SuccessFlashMessage({ email }: { email: string }) {
   return (
     <Alert color="success">
       <i className="fa fa-check mr-1" aria-hidden="true" />
@@ -99,7 +119,7 @@ function SuccessFlashMessage({ email }) {
   );
 }
 
-export default function ShareButton(props) {
+export default function ShareButton() {
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
   const toggleIsShareModalOpen = React.useCallback(
     () => setIsShareModalOpen((prevState) => !prevState),
@@ -107,7 +127,7 @@ export default function ShareButton(props) {
   );
 
   const [submittedEmail, setSubmittedEmail] = React.useState("");
-  const onSubmit = (email) => {
+  const onSubmit = (email: string) => {
     toggleIsShareModalOpen();
     setSubmittedEmail(email);
   };

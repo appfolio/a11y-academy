@@ -5,12 +5,13 @@ import {
 } from "@reach/router";
 import "@testing-library/jest-dom/extend-expect";
 import { cleanup, fireEvent, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import axe from "axe-core";
 import React from "react";
 import App from "./App";
 
 function renderWithRouter(
-  ui,
+  ui: React.ReactElement,
   { route = "/", history = createHistory(createMemorySource(route)) } = {}
 ) {
   return {
@@ -66,7 +67,7 @@ describe("App", () => {
 
     fireEvent.click(getByText("Add New Entry"));
 
-    await findByText("There were 3 problems with your form:");
+    await findByText("There were 3 problem(s) with your form:");
 
     expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
     expect(getAllByText("You must enter a title").length).toEqual(2);
@@ -82,19 +83,14 @@ describe("App", () => {
       }
     );
 
-    const titleInput = getByLabelText("Title");
-    fireEvent.change(titleInput, { target: { value: "Suh dude" } });
-    expect(titleInput.value).toBe("Suh dude");
+    userEvent.type(getByLabelText("Title"), "Suh dude");
+    expect(getByLabelText("Title")).toHaveValue("Suh dude");
 
-    const bodyInput = getByLabelText("Body");
-    fireEvent.change(bodyInput, {
-      target: { value: "Kiss me thru the phone" },
-    });
-    expect(bodyInput.value).toBe("Kiss me thru the phone");
+    userEvent.type(getByLabelText("Body"), "Kiss me thru the phone");
+    expect(getByLabelText("Body")).toHaveValue("Kiss me thru the phone");
 
-    const greenRadio = getByLabelText("Green");
-    fireEvent.click(greenRadio);
-    expect(greenRadio.checked).toBe(true);
+    userEvent.click(getByLabelText("Green"));
+    expect(getByLabelText("Green")).toBeChecked();
 
     fireEvent.click(getByText("Add New Entry"));
 

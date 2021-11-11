@@ -1,7 +1,8 @@
-import { Link } from "@reach/router";
+import { Link, RouteComponentProps } from "@reach/router";
 import React from "react";
 import { Button, Jumbotron } from "reactstrap";
 import TILCard from "./TILCard";
+import type { Entry } from "./sharedTypes";
 
 function BannerImage() {
   return (
@@ -14,7 +15,12 @@ function BannerImage() {
     </Jumbotron>
   );
 }
-export default function IndexPage({ entries }) {
+
+type IndexPageProps = RouteComponentProps & {
+  entries: Entry[];
+};
+
+export default function IndexPage({ entries }: IndexPageProps) {
   React.useEffect(() => {
     document.title = "Today We Learned";
   }, []);
@@ -41,7 +47,7 @@ export default function IndexPage({ entries }) {
       <ul className="list-unstyled">
         {entries.map((entry) => (
           <li key={entry.title}>
-            <TILCard className="mb-3" title={entry.title} author={entry.author}>
+            <TILCard className="mb-3" title={entry.title}>
               {entry.body}
             </TILCard>
           </li>

@@ -1,4 +1,9 @@
-import { Router, Location } from "@reach/router";
+import {
+  Router,
+  Location,
+  RouteComponentProps,
+  NavigateFn,
+} from "@reach/router";
 import React from "react";
 import { Container } from "reactstrap";
 import FaqPage from "./FaqPage";
@@ -7,9 +12,10 @@ import IndexPage from "./IndexPage";
 import MyNav from "./MyNav";
 import NewEntryForm from "./NewEntryForm";
 import ShowPage from "./ShowPage";
-import data from "./seeddata";
+import type { NewEntry, NewEntryErrors } from "./sharedTypes";
+import data from "./seeddata.json";
 
-function SkipNavLink({ skipId }) {
+function SkipNavLink({ skipId }: { skipId: string }) {
   return (
     <a className="sr-only sr-only-focusable" href={`#${skipId}`}>
       Skip to content
@@ -17,7 +23,7 @@ function SkipNavLink({ skipId }) {
   );
 }
 
-function MainLayout({ children }) {
+function MainLayout({ children }: { children: React.ReactElement }) {
   return (
     <>
       <SkipNavLink skipId="main-content" />
@@ -33,16 +39,17 @@ function MainLayout({ children }) {
   );
 }
 
-function App({ location, navigate }) {
-  const onSubmit = async (data) => {
+type AppProps = RouteComponentProps & { navigate: NavigateFn };
+
+function App({ location, navigate }: AppProps) {
+  const onSubmit = async (data: NewEntry) => {
     const { title, body, favoriteColor, team } = data;
 
-    const errors = {
-      title: title.length > 0 ? null : "You must enter a title",
-      body: body.length > 0 ? null : "You must enter a body",
-      favoriteColor: favoriteColor ? null : "You must enter a color",
-      team: team ? null : "You must enter a team",
-    };
+    const errors: NewEntryErrors = {};
+    if (title.length === 0) errors.title = "You must enter a title";
+    if (body.length === 0) errors.body = "You must enter a body";
+    if (!favoriteColor) errors.favoriteColor = "You must enter a color";
+    if (!team) errors.team = "You must enter a team";
 
     if (!(errors.title || errors.body || errors.favoriteColor || errors.team)) {
       await navigate("/", {

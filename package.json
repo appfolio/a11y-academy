@@ -21,6 +21,7 @@
     "web-vitals": "^1.1.2 "
   },
   "scripts": {
+    "tsc": "tsc",
     "start": "react-scripts start",
     "lint": "eslint src",
     "build": "react-scripts build",
@@ -44,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/reach__router": "^1.3.9"
   }
 }
