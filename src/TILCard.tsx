@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import { Card, CardBody, CardHeader, CardTitle, CardText } from "reactstrap";
 import ShareButton from "./ShareButton";
 

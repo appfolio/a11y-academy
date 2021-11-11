@@ -1,4 +1,4 @@
-import { Link, RouteComponentProps } from "@reach/router";
+import { Link } from "react-router-dom";
 import React from "react";
 import {
   Alert,
@@ -71,7 +71,7 @@ function ErrorBanner({ errorMessages }: ErrorBannerProps) {
   );
 }
 
-export type NewEntryFormProps = RouteComponentProps & {
+export type NewEntryFormProps = {
   onSubmit: (entry: NewEntry) => Promise<NewEntryErrors>;
 };
 

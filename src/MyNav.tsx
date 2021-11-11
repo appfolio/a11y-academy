@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
 
 export default function MyNav() {

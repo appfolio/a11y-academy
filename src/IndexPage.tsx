@@ -1,4 +1,4 @@
-import { Link, RouteComponentProps } from "@reach/router";
+import { Link } from "react-router-dom";
 import React from "react";
 import { Button } from "reactstrap";
 import TILCard from "./TILCard";
@@ -24,7 +24,7 @@ function BannerImage() {
   );
 }
 
-type IndexPageProps = RouteComponentProps & {
+type IndexPageProps = {
   entries: Entry[];
 };
 

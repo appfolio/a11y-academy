@@ -1,9 +1,9 @@
 import {
-  Router,
-  Location,
-  RouteComponentProps,
-  NavigateFn,
-} from "@reach/router";
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import React from "react";
 import { Container } from "reactstrap";
 import FaqPage from "./FaqPage";
@@ -39,9 +39,10 @@ function MainLayout({ children }: { children: React.ReactElement }) {
   );
 }
 
-type AppProps = RouteComponentProps & { navigate: NavigateFn };
+export default function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-function App({ location, navigate }: AppProps) {
   const onSubmit = async (data: NewEntry) => {
     const { title, body, favoriteColor, team } = data;
 
@@ -68,25 +69,18 @@ function App({ location, navigate }: AppProps) {
 
   return (
     <MainLayout>
-      <Router location={location}>
-        <IndexPage path="/" entries={entries} />
-        <FaqPage path="/faqs" />
-        <NewEntryForm path="/entries/new" onSubmit={onSubmit} />
-        <ShowPage entries={entries} path="/entries/:title" />
-      </Router>
+      <Routes location={location}>
+        <Route path="/" element={<IndexPage entries={entries} />} />
+        <Route path="/faqs" element={<FaqPage />} />
+        <Route
+          path="/entries/new"
+          element={<NewEntryForm onSubmit={onSubmit} />}
+        />
+        <Route
+          path="/entries/:title"
+          element={<ShowPage entries={entries} />}
+        />
+      </Routes>
     </MainLayout>
   );
 }
-
-// this component exists as a hack due to a bug in testing reach router
-function MyLocationWrapper() {
-  return (
-    <Location>
-      {({ location, navigate }) => (
-        <App location={location} navigate={navigate} />
-      )}
-    </Location>
-  );
-}
-
-export default MyLocationWrapper;

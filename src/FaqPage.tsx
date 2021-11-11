@@ -1,4 +1,3 @@
-import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { Collapse } from "reactstrap";
 
@@ -105,7 +104,7 @@ function FaqList({ faqs }: { faqs: FAQProps[] }) {
   );
 }
 
-export default function FaqPage(_props: RouteComponentProps) {
+export default function FaqPage() {
   React.useEffect(() => {
     document.title = "Frequently Asked Questions";
   }, []);

@@ -1,60 +1,50 @@
-import {
-  createHistory,
-  createMemorySource,
-  LocationProvider,
-} from "@reach/router";
+import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { screen, cleanup, fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axe from "axe-core";
 import React from "react";
 import App from "./App";
 
-function renderWithRouter(
-  ui: React.ReactElement,
-  { route = "/", history = createHistory(createMemorySource(route)) } = {}
-) {
-  return {
-    ...render(<LocationProvider history={history}>{ui}</LocationProvider>),
-    history,
-  };
+function renderWithRouter(ui: React.ReactElement, { route } = { route: "/" }) {
+  return render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>);
 }
 
 describe("App", () => {
   afterEach(cleanup);
 
-  it("doesnt have any accessibility violations on index", async () => {
-    const { container } = renderWithRouter(<App />);
-    const { violations } = await axe.run(container);
-    expect(violations).toEqual([]);
-  });
+  describe("accessibility", () => {
+    it("has no violations on the index page", async () => {
+      const { container } = renderWithRouter(<App />);
+      expect(container.innerHTML).toMatch("Today We Learned");
+      const { violations } = await axe.run(container);
+      expect(violations).toEqual([]);
+    });
 
-  it("doesnt have any accessibility violations on the faqs page", async () => {
-    const { container } = renderWithRouter(<App />, { route: "/faqs" });
-    const { violations } = await axe.run(container);
-    expect(violations).toEqual([]);
-  });
+    it("has no violations on the faqs page", async () => {
+      const { container } = renderWithRouter(<App />, { route: "/faqs" });
+      expect(container.innerHTML).toMatch("Frequently Asked Questions");
+      const { violations } = await axe.run(container);
+      expect(violations).toEqual([]);
+    });
 
-  it("doesnt have any accessibility violations on the new entry page", async () => {
-    const { container } = renderWithRouter(<App />, { route: "/entries/new" });
-    const { violations } = await axe.run(container);
-    expect(violations).toEqual([]);
-  });
+    it("has no violations on the new entry page", async () => {
+      const { container } = renderWithRouter(<App />, {
+        route: "/entries/new",
+      });
+      expect(screen.getByRole("heading")).toHaveTextContent("New TWL Entry");
+      const { violations } = await axe.run(container);
+      expect(violations).toEqual([]);
+    });
 
-  it("routes everywhere correctly", async () => {
-    const {
-      container,
-      getByRole,
-      history: { navigate },
-    } = renderWithRouter(<App />);
-
-    expect(container.innerHTML).toMatch("Today We Learned");
-
-    await navigate("/faqs");
-    expect(container.innerHTML).toMatch("Frequently Asked Questions");
-
-    await navigate("/entries/new");
-    expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
+    it("has no violations on the show page", async () => {
+      const { container } = renderWithRouter(<App />, {
+        route: "/entries/Risky%20Migrations",
+      });
+      expect(container.innerHTML).toMatch("Risky Migrations");
+      const { violations } = await axe.run(container);
+      expect(violations).toEqual([]);
+    });
   });
 
   it("shows error messages on the form", async () => {
@@ -97,8 +87,7 @@ describe("App", () => {
     const heading = await findByTestId("page-heading");
     expect(heading).toHaveTextContent("Today We Learned");
 
-    // TODO: test flash messages
-    // https://github.com/reach/router/issues/225
+    expect(getByText("Successfully added new entry")).toBeVisible();
   });
 
   it("has a share modal that works", async () => {
