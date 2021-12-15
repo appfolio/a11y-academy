@@ -25,24 +25,27 @@ function ButtonWithTooltip({
   toolTipText,
   ...props
 }: ButtonWithTooltipProps) {
+  // TODO: use useId here in react 18
   const targetId = "button-with-tooltip-target";
+  const tooltipId = "tooltip-for-disabled-button";
+
+  if (!disabled) return <Button {...props}>{children}</Button>;
 
   return (
     // Note we don't need a title attribute due to visible text from tooltip
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-    <span id={targetId} className="d-inline-block" tabIndex={disabled ? 0 : -1}>
-      <Button
-        style={{ pointerEvents: disabled ? "none" : "inherit" }}
-        disabled={disabled}
-        {...props}
-      >
+    <span
+      id={targetId}
+      data-testid="button-with-tooltip-target"
+      style={{ cursor: "not-allowed" }}
+      tabIndex={0}
+    >
+      <Button aria-describedby={tooltipId} disabled {...props}>
         {children}
       </Button>
-      {disabled && (
-        <UncontrolledTooltip target={targetId}>
-          {toolTipText}
-        </UncontrolledTooltip>
-      )}
+      <UncontrolledTooltip id={tooltipId} target={targetId}>
+        <span>{toolTipText}</span>
+      </UncontrolledTooltip>
     </span>
   );
 }
