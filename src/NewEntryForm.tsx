@@ -61,7 +61,11 @@ function ErrorBanner({ errorMessages }: ErrorBannerProps) {
 
   return (
     <Alert color="danger">
-      <p>There were {messages.length} problem(s) with your form:</p>
+      <p>
+        {messages.length > 1
+          ? `There were ${messages.length} problems with your form:`
+          : "There was 1 problem with your form:"}
+      </p>
       <ul>
         {messages.map((m) => (
           <li key={m}>{m}</li>

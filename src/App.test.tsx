@@ -57,7 +57,7 @@ describe("App", () => {
 
     fireEvent.click(getByText("Add New Entry"));
 
-    await findByText("There were 3 problem(s) with your form:");
+    await findByText("There were 3 problems with your form:");
 
     expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
     expect(getAllByText("You must enter a title").length).toEqual(2);
