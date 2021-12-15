@@ -1,6 +1,6 @@
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { screen, cleanup, fireEvent, render } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axe from "axe-core";
 import React from "react";
@@ -11,8 +11,6 @@ function renderWithRouter(ui: React.ReactElement, { route } = { route: "/" }) {
 }
 
 describe("App", () => {
-  afterEach(cleanup);
-
   describe("accessibility", () => {
     it("has no violations on the index page", async () => {
       const { container } = renderWithRouter(<App />);
@@ -48,72 +46,55 @@ describe("App", () => {
   });
 
   it("shows error messages on the form", async () => {
-    const { getByRole, getAllByText, getByText, findByText } = renderWithRouter(
-      <App />,
-      {
-        route: "/entries/new",
-      }
-    );
+    renderWithRouter(<App />, { route: "/entries/new" });
 
-    fireEvent.click(getByText("Add New Entry"));
+    userEvent.click(screen.getByText("Add New Entry"));
 
-    await findByText("There were 3 problems with your form:");
+    await screen.findByText("There were 3 problems with your form:");
 
-    expect(getByRole("heading")).toHaveTextContent("New TWL Entry");
-    expect(getAllByText("You must enter a title").length).toEqual(2);
-    expect(getAllByText("You must enter a body").length).toEqual(2);
-    expect(getAllByText("You must enter a color").length).toEqual(2);
+    expect(screen.getByRole("heading")).toHaveTextContent("New TWL Entry");
+    expect(screen.getAllByText("You must enter a title").length).toEqual(2);
+    expect(screen.getAllByText("You must enter a body").length).toEqual(2);
+    expect(screen.getAllByText("You must enter a color").length).toEqual(2);
   });
 
   it("successfully adds a new entry", async () => {
-    const { findByTestId, getByLabelText, getByText } = renderWithRouter(
-      <App />,
-      {
-        route: "/entries/new",
-      }
-    );
+    renderWithRouter(<App />, { route: "/entries/new" });
 
-    userEvent.type(getByLabelText("Title"), "Suh dude");
-    expect(getByLabelText("Title")).toHaveValue("Suh dude");
+    userEvent.type(screen.getByLabelText("Title"), "Suh dude");
+    expect(screen.getByLabelText("Title")).toHaveValue("Suh dude");
 
-    userEvent.type(getByLabelText("Body"), "Kiss me thru the phone");
-    expect(getByLabelText("Body")).toHaveValue("Kiss me thru the phone");
+    userEvent.type(screen.getByLabelText("Body"), "Kiss me thru the phone");
+    expect(screen.getByLabelText("Body")).toHaveValue("Kiss me thru the phone");
 
-    userEvent.click(getByLabelText("Green"));
-    expect(getByLabelText("Green")).toBeChecked();
+    userEvent.click(screen.getByLabelText("Green"));
+    expect(screen.getByLabelText("Green")).toBeChecked();
 
-    fireEvent.click(getByText("Add New Entry"));
+    userEvent.click(screen.getByText("Add New Entry"));
 
-    const heading = await findByTestId("page-heading");
+    const heading = await screen.findByTestId("page-heading");
     expect(heading).toHaveTextContent("Today We Learned");
 
-    expect(getByText("Successfully added new entry")).toBeVisible();
+    expect(screen.getByText("Successfully added new entry")).toBeVisible();
   });
 
   it("has a share modal that works", async () => {
-    const { getAllByText, getByLabelText, getByText } = renderWithRouter(
-      <App />,
-      {
-        route: "/",
-      }
-    );
+    renderWithRouter(<App />, { route: "/" });
 
-    const [shareButton] = getAllByText("Share");
-    fireEvent.click(shareButton);
+    const [shareButton] = screen.getAllByText("Share");
+    userEvent.click(shareButton);
 
-    expect(getByText("Share Today We Learned")).toBeVisible();
+    expect(screen.getByText("Share Today We Learned")).toBeVisible();
 
     // TODO: test tooltip
-    expect(getByText("Share TWL Entry")).toBeDisabled();
+    expect(screen.getByText("Share TWL Entry")).toBeDisabled();
 
-    fireEvent.change(getByLabelText("Email"), {
-      target: { value: "hello@example.com" },
-    });
-    expect(getByText("Share TWL Entry")).not.toBeDisabled();
+    userEvent.type(screen.getByLabelText("Email"), "hello@example.com");
+    expect(screen.getByText("Share TWL Entry")).not.toBeDisabled();
 
-    fireEvent.click(getByText("Share TWL Entry"));
+    userEvent.click(screen.getByText("Share TWL Entry"));
     expect(
-      getByText("Successfully shared article with hello@example.com")
+      screen.getByText("Successfully shared article with hello@example.com")
     ).toBeVisible();
   });
 });
