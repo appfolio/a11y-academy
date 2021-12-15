@@ -1,9 +1,4 @@
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import React from "react";
 import { Container } from "reactstrap";
 import FaqPage from "./FaqPage";
@@ -40,7 +35,6 @@ function MainLayout({ children }: { children: React.ReactElement }) {
 }
 
 export default function App() {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const onSubmit = async (data: NewEntry) => {
@@ -69,7 +63,7 @@ export default function App() {
 
   return (
     <MainLayout>
-      <Routes location={location}>
+      <Routes>
         <Route path="/" element={<IndexPage entries={entries} />} />
         <Route path="/faqs" element={<FaqPage />} />
         <Route
