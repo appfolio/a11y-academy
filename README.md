@@ -41,6 +41,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
+Note that if there are Typescript errors, the app won't compile. To bypass this set the environment variable `TSC_COMPILE_ONERROR=true`, e.g.
+
+```
+TSC_COMPILE_ONERROR=true npm start
+```
+
 ### Run the linter
 
 ```
@@ -60,7 +66,8 @@ npm test
 - [Page Title](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
 - [Cards](https://inclusive-components.design/cards/)
 - [Skip navigation links](https://webaim.org/techniques/skipnav/)
-  - [Bootstrap screeen reader utilities](https://getbootstrap.com/docs/4.3/utilities/screen-readers/)
+  - [Bootstrap screeen reader utilities (v4)](https://getbootstrap.com/docs/4.6/utilities/screen-readers/)
+  - [Bootstrap visually hidden utilities (v5)](https://getbootstrap.com/docs/5.0/helpers/visually-hidden/)
 - [Button](http://w3c.github.io/aria-practices/#button) - don't add click handlers to `<div>`s - just use a button 🙂
 - [Link](http://w3c.github.io/aria-practices/#link) - great for navigating to another page or to a section of the current page. Links != buttons
 - [Main landmark](http://w3c.github.io/aria-practices/#aria_lh_main)
@@ -94,14 +101,22 @@ npm test
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse/) (built into Chrome)
 - [Web Inspector Audits](https://webkit.org/blog/8935/audits-in-web-inspector/) (built into Safari Technology Preview)
 
-### Development
+### Development Tools
 
 - [eslint-plulgin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) - ESLint plugin for accessibility rules on JSX elements
 - [axe-core](https://github.com/dequelabs/axe-core) - an accessibility testing engine
+- [axe Linter (VSCode)](https://marketplace.visualstudio.com/items?itemName=deque-systems.vscode-axe-linter) - an editor plugin that checks for accessibility issues
+- [axe Linter (GitHub app)](https://github.com/marketplace/axe-linter) - automatically finds and fixes issues on GitHub pull requests
 
-### Other libraries
+### Core Library Accessibility Docs
 
-- [@reach/router](https://reach.tech/router) - A client side router that automatically manages focus
+- Bootstrap Accessibility
+  - [v4 docs](https://getbootstrap.com/docs/4.6/getting-started/accessibility/)
+  - [v5 docs](https://getbootstrap.com/docs/4.6/getting-started/accessibility/)
+- [React Accessibility](https://reactjs.org/docs/accessibility.html)
+
+### Other Libraries
+
 - [React Testing Libary](https://testing-library.com/docs/react-testing-library/intro) - a general purpose testing library for React (replacement for Enzyme) with accessibility as a first class concern
 
 ### Other Stuff
@@ -109,3 +124,5 @@ npm test
 - [VoiceOver Keyboard Shortcuts on a Mac](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
 
 This project was inspired by Marcy Sutton's [Empathy Driven Development](https://github.com/marcysutton/empathy-driven-development) project and her [talk at JSConf EU 2018](https://www.youtube.com/watch?v=l95VFLj3e2w).
+
+Special thanks to Brianna Koch and Nic Bertino for their help in developing this course.
