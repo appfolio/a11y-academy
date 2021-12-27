@@ -36,7 +36,7 @@ export default function IndexPage({ entries }: IndexPageProps) {
   return (
     <>
       <header>
-        <h1 data-testid="page-heading">Today We Learned</h1>
+        <h1>Today We Learned</h1>
         <BannerImage />
         <p>
           A bunch of write ups about something a team learned. Failure is ok as
