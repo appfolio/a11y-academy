@@ -52,9 +52,8 @@ type FAQProps = {
 
 function FAQ({ question, answer }: FAQProps) {
   const [isOpen, setIsOpen] = React.useState(true);
-  // Note that there is a details and summary component,
-  // but Edge doesn't have support and no way to animate
-  // transitions. Default cursor is wrong too.
+  // Note that there is a <details> and <summary> component, but there is no
+  // way to animate transitions. The default cursor is also wrong.
 
   return (
     <>
